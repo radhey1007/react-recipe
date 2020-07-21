@@ -1,9 +1,27 @@
 import React , {useEffect , useState} from 'react';
 import './App.css';
+import Button from '@material-ui/core/Button';
+
 import Receipe from  './components/Recipe';
 import Header from  './components/header';
 import Footer from  './components/footer';
 
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 function App() {
 
@@ -13,6 +31,9 @@ function App() {
   const [receipes , setReceipe] = useState([]);
   const [search , setSearch] = useState('');
   const [query , setQuery] = useState('banana'); 
+
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
 
   // if there is an change in state the useEffect will run or pass an empty array in second params of useeffect to run once on load the component.
 
@@ -35,12 +56,19 @@ function App() {
   const handleSubmit = e => {
     e.preventDefault();
     if(!search) {
-      alert('Please enter recipe name..');
+      setOpen(true);
       return false;
     }
     setQuery(search);
     setSearch('');
   }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     <div className="App">
@@ -49,10 +77,17 @@ function App() {
       <form className="recipeForm" onSubmit = {handleSubmit}>
       <input type="text" className="serachBar" value={search} onChange={handleChange}>
       </input>
-      <button className="serachButton"> Search </button>       
+      <button className="serachButton"> Search </button>
+
+    <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} >
+    <Alert onClose={handleClose} severity="error">
+        Please enter recipe name !
+    </Alert>
+  </Snackbar>
+    
       </form>
       <div className="receipeList">
-      {receipes.map(recipe => 
+      { receipes.map(recipe => 
           <Receipe 
           key = {recipe.recipe.label}
           title = {recipe.recipe.label}
