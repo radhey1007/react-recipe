@@ -1,0 +1,7 @@
+.appFooter {
+   display: flex;
+   min-height: 8vh;
+   background-image: linear-gradient(to top, #ebc0fd 0%, #d9ded8 100%);   flex-direction: column;
+   color: black;
+   padding: 10px;
+}

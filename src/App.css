@@ -1,38 +1,26 @@
 .App {
+  min-height: 100vh;
+  background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+}
+.recipeForm {
+  min-height: 8vh;
+  display: flex;
+  justify-content: center;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.serachBar {
+  width:50%;
+  border:none;
+  padding: 0px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.serachButton {
+  background: blueviolet;
+  border: none;
   color: white;
+  padding: 10px 30px;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.receipeList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
